@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 // Aula1 PI
 
 // Função que desenha um quadrado
@@ -38,14 +37,27 @@ void imprime_xadrez (int x){
   #####
     #
 */
+
+// Função que calcula a^b 
+int pow_aux(int a, int b)
+{
+    int r = 1;
+    for (; b > 0; b--)
+    {
+        r *= a;
+    }
+    return r;
+}
+
 int imprime_circulo (int x){
     int i, j;
     int nc = 0;
-    for (i = 0; i < 2 * x +1; i++)
+    for (i = 0; i <= 2 * x +1; i++)
     {
-        for (j = 0; j < 2 * x +1; j++)
+        for (j = 0; j <= 2 * x +1; j++)
         {
-            if (pow(i-x-1,2) + pow (j-x-1,2) <= pow (x,2)){
+            if (pow_aux(i - x - 1, 2) + pow_aux(j - x - 1, 2) <= pow_aux(x, 2))
+            {
                 printf("#");
                 nc++;
             }
@@ -64,6 +76,6 @@ int main (){
     //imprime_quadrado (x);
     //imprime_xadrez (x);
     nc = imprime_circulo(x);
-    printf ("%d",nc);
+    printf ("Existem %d simbolos.\n",nc);
     return 0;
 }
