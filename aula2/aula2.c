@@ -3,7 +3,7 @@
 // Exercicio 1
 float multInt1(int n, float m)
 {
-    float r = 0;
+    float r = 0.0;
     while (n > 0){
         r+=m;
         n--;
@@ -23,17 +23,56 @@ float multInt2 (int n, float m){
     return r;
 }
 
-// Exercicio 3
-
-int mdc1 (int a, int b){
+//
+/**
+ * @brief Multiplica 2 numeros e conta o nº de operaçoes entre floats realizadas
+ * 
+ * @param n Numero 1 a multiplicar
+ * @param m Numero 2 a multiplicar
+ * @param count Numero de operaçoes realizadas entre floats
+ * @return float Retorna (r = n*m) e o numero de operaçoes entre floats
+ */
+float multInt2_contador(int n, float m, int* count)
+{
+    *count = 0; // "o apontado de count é zero"
     int r = 0;
-    int maior = a > b ? a:b;
-    for (int i = 1; i <= maior; i++)
+    while (n > 0)
     {
-        if (a % i == 0 && b % i == 0)
-            r = i;
+        if (n % 2 == 1){
+            r += m;
+            (*count)++;
+        }
+        n /= 2;
+        m *= 2;
     }
     return r;
+}
+
+/**
+ * @brief Troca o valor de 2 inteiros
+ * 
+ * @param a Valor 1 a trocar
+ * @param b Valor 2 a trocar
+ */
+void swap (int *a, int *b)
+{ // swap (&a,&b); -> forma de invocar
+    int aux;
+    aux = *a;
+    *a = *b;
+    *b = aux;
+}
+// Exercicio 3
+int mdc1 (int a, int b){
+    int divisor;
+    if (a < b)
+        divisor = a;
+    else
+        divisor = b;
+
+    while (((a%divisor != 0)||(b%divisor!=0))
+             &&(divisor>1))
+        divisor--;
+    return divisor;
 }
 
 
@@ -50,11 +89,28 @@ int mdc2(int a, int b){
     return r;
 }
 
-// Exercicio 5
-int mdc3(int a, int b){
-    return 0;
+int mdc3(int a, int b, int*count){
+    while (a != b){
+        if (a<b)
+            b-=a;
+        else 
+            a-=b;
+        (*count)++;
+    }
+    return a;
 }
 
+//Extra 
+int mdc_extra(int a, int b){
+    int r = 0;
+    int maior = a > b ? a : b;
+    for (int i = 1; i <= maior; i++)
+    {
+        if (a % i == 0 && b % i == 0)
+            r = i;
+    }
+    return r;
+}
 
 //Exercicio 6 -(a)
 int fib1 (int n){
@@ -68,19 +124,18 @@ int fib1 (int n){
     return r;
 }
 
-//Exercicio 6 -(b) -- ERRADO
+//Exercicio 6 -(b) 
 int fib2(int n){
-    int r = 0;
-    int acc1, acc2;
+    int temp, acc1, acc2;
     acc1 = acc2 = 1;
 
     for (int i = 3; i<=n; i++){
-        r = r + acc1 + acc2;
-        acc1 = i+1;
-        acc2 = i+2;
+        temp = acc2;
+        acc2 += acc1;
+        acc1 = temp;
     }
 
-    return r;
+    return acc2;
 }
 
 
@@ -94,5 +149,6 @@ int main()
 
     printf("Fib1: %d\n",x);
     printf("Fib2: %d\n",r);
+
     return 0;
 }
