@@ -23,28 +23,78 @@ int soma(int v[], int N){
     return r;
 }
 
-//Exercicio 5 -- errado
+//Exercicio 5 
 void inverteArray_v1(int v[], int N){
     int i = N;
     int j = 0;
-    while (i >= j){
+    while (j < i){
         swap(v,i,j);
         i--;
         j++;
     }
 }
 
-void printArray (int v[], int N){
-    for (int i = 0; i < N; i++)
-        printf("%d ",v[i]);
+void inverteArray_v2(int v[], int N){
+    int i = N - 1;
+    int j = 0;
+    while (j < i)
+    {
+        swapM(&v[i], &v[j]);
+        i--;
+        j++;
+    }
 }
 
-int main()
-{
-    int v[10] = {0,1,2,3,4,5,6,7,8,9};
+//Exercicio 6
+int maximum (int v[], int N, int *m){
+    *m = v[0];
+    if (N > 0)
+    {
+        for (int i = 1; i < N; i++)
+            if (*m < v[i])
+                *m = v[i];
+        return 0;
+    }
+    else
+        return -1;
+}
 
-    inverteArray_v1(v,10);
+//Exercicio 7
+void quadrados (int q[], int N){
+    for (int i = -1; i < N-1; i++){
+        int r = i * i + (2 * i + 1);
+        q[i+1] = r;
+    }
+}
 
-    printArray(v,10);
-    return 0;
+//Exercicio 8 -(a)
+void pascal (int v[], int N){
+    if (N==1)
+        v[0] = 1;
+    else{
+        int aux[N-1];
+        pascal (aux,N-1);
+        v[0] = v[N-1] = 1;
+        for (int i = 1; i < N-1; i++)
+            v[i] = aux[i-1]+aux[i];
+    }
+}
+
+//Exercicio 8 -(b)
+
+void desenha_trianguloPascal (int v[],int N){
+    if (N == 1){
+        v[0]=1;
+        printf("%d \n",v[0]);
+    }
+    else
+    {
+        for (int i = 1; i <= N; i++)
+        {
+            pascal(v, i);
+            for (int j = 0; j < i; j++)
+                printf("%d ", v[j]);
+            printf("\n");
+        }
+    }
 }
