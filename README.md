@@ -4,4 +4,5 @@
 ```
 FICHA1: Estado e atribuições; Estruturas de controlo; Programas iterativos
 FICHA2: Algoritmos Numéricos sobre inteiros
+FICHA3: Vetores de inteiros
 ```
