@@ -186,3 +186,25 @@ void strnoV (char t[]){
     
     t[i-c] = '\0';
 }
+//13: Trunca cada palavra de uma string com no maximo n caracteres
+void truncW (char t[], int n){
+    int i,j,k;
+    i = j = k = 0;
+
+    while (t[i] != '\0'){
+        if (t[i] == ' '){
+            t[k] = t[i];
+            k++; i++; j = 0;
+        }
+
+        else if (j < n){
+            t[k] = t[i];
+            k++; i++; j++;
+        }
+
+        else if (j >= n) 
+            i++;
+    }
+
+    t[k] = '\0';
+}
