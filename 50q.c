@@ -133,3 +133,23 @@ int mystrcmp(char s1[], char s2[]) {
     //Subtração entre o ultimo caractere igual comum às 2 strings
     return (s1[i]-s2[i]);
 }
+
+//10: Calcula a string comum às 2 (a contar da esquerda para a direita)
+char *mystrstr (char s1[], char s2[]){
+    int i= 0;
+    int j= 0;
+    
+    while(s1[i] != '\0' && s2[j] != '\0'){
+        if(s1[i]== s2[j]) 
+            j++; // numero de caracteres iguais
+        else 
+            j= 0; // nao existem caracteres iguais
+        i++;
+    }
+    
+    if(s2[j] == '\0')
+        return &(s1[i - j]); //apenas fica na string resultado os caracteres comuns consecutivos às 2 strings
+    else 
+        return NULL;
+}
+
