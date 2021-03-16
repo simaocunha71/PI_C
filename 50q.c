@@ -120,3 +120,16 @@ char *mystrcpy(char s1[], const char s2[]) {
     return s1;
 }
 
+//9: Compara lexicograficamente 2 strings
+int mystrcmp(char s1[], char s2[]) {
+    int i;
+    
+    // Calcula o numero de caracteres iguais, guardando o valor em i
+    for (i = 0; s1[i]!='\0' &&
+                s2[i]!='\0' && 
+                s1[i]==s2[i]; 
+                              i++);
+    
+    //Subtração entre o ultimo caractere igual comum às 2 strings
+    return (s1[i]-s2[i]);
+}
