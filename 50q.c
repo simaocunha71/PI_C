@@ -153,3 +153,17 @@ char *mystrstr (char s1[], char s2[]){
         return NULL;
 }
 
+//11: Inverte um array
+void strrev(char s[]){
+    int size,i;
+    
+    for(size = 0; s[size] != '\0'; size++);
+    
+    char aux[size];
+    
+    for(i = 0; i < size; i++) 
+        aux[i] = s[size - i - 1]; //aux é um array inverso de s (s ainda inalterado)
+    
+    for(i = 0; i < size; i++) 
+        s[i] = aux[i]; // s está invertido 
+}
