@@ -167,3 +167,22 @@ void strrev(char s[]){
     for(i = 0; i < size; i++) 
         s[i] = aux[i]; // s está invertido 
 }
+
+//12: Retira as vogais duma string 
+void strnoV (char t[]){
+    int i;
+    int c = 0;
+    
+    for (i = 0; t[i] != '\0'; i++){
+        if (t[i] == 'a'|| t[i] == 'A'||
+            t[i] == 'e'|| t[i] == 'E'||
+            t[i] == 'i'|| t[i] == 'I'||
+            t[i] == 'o'|| t[i] == 'O'||
+            t[i] == 'u'|| t[i] == 'U')
+            c++;
+        else
+            t[i-c] = t[i];
+    }
+    
+    t[i-c] = '\0';
+}
