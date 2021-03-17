@@ -25,7 +25,7 @@ int soma(int v[], int N){
 
 //Exercicio 5 
 void inverteArray_v1(int v[], int N){
-    int i = N;
+    int i = N-1;
     int j = 0;
     while (j < i){
         swap(v,i,j);
@@ -47,22 +47,24 @@ void inverteArray_v2(int v[], int N){
 
 //Exercicio 6
 int maximum (int v[], int N, int *m){
-    *m = v[0];
-    if (N > 0)
+
+    if (N >= 0)
     {
+        *m = v[0];
         for (int i = 1; i < N; i++)
             if (*m < v[i])
                 *m = v[i];
         return 0;
     }
     else
-        return -1;
+        return 1;
 }
 
 //Exercicio 7
 void quadrados (int q[], int N){
-    for (int i = -1; i < N-1; i++){
-        int r = i * i + (2 * i + 1);
+    int r,i;
+    for (i = -1; i < N-1; i++){
+        r = i * i + (2 * i + 1);
         q[i+1] = r;
     }
 }
@@ -97,4 +99,34 @@ void desenha_trianguloPascal (int v[],int N){
             printf("\n");
         }
     }
+}
+
+void desenha (int N){
+    int *v;
+    if (N == 1)
+    {
+        v[0] = 1;
+        printf("%d \n", v[0]);
+    }
+    else
+    {
+        for (int i = 1; i <= N; i++)
+        {
+            pascal(v, i);
+            for (int j = 0; j < i; j++)
+                printf("%d ", v[j]);
+            printf("\n");
+        }
+    }
+}
+
+void printArray (int v[],int N){
+    for (int i = 0; i < N; i++)
+        printf("%d ",v[i]);
+}
+
+int main (){
+    int v[5] = {1,2,3,4,5};
+    desenha (5);
+    //printArray (v,5);
 }
