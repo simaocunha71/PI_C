@@ -19,10 +19,33 @@ int contaVogais(char *s) {
 //Exercicio 2
 
 
-int main (){
-    char* s = "abcAbcgeFg";
 
-    int r = contaVogais(s);
-    printf("numero de vogais: %d\n", r);
+/* Arrays ordenados */
+
+// Exercicio 1
+int ordenado(int v[], int N)
+{
+    int bool = 1;
+    for (int i = 0; i < N; i++)
+    {
+        if (v[i] > v[i + 1])
+            bool = 0;
+    }
+    return bool;
+}
+
+// Exercicio 2
+
+
+int main (){
+   // char* s = "abcAbcgeFg";
+   // int r = contaVogais(s);
+   // printf("numero de vogais: %d\n", r);
+    
+    int v[6] = {1,5,12,-1,4,10};
+    int v1[6] = {1,2,3,4,5,6};
+    int b = ordenado(v,6);
+    printf("bool: %d\n",b);
+    
     return 0;
 }
