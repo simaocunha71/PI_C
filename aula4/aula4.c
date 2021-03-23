@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 /***************************************** Funçoes sobre strings *****************************************/
 
@@ -130,6 +131,79 @@ int duplicaVogais_v2(char *s)
     return num_dupl;
 }
 
+////////////////////////////// Extras //////////////////////////////////
+
+/**
+ * @brief Substitui todas as maiusculas pelas respetivas minusculas
+ * 
+ * @param s string
+ * @return int Numero de alteraçoes feitas
+ */
+int minusculas (char s[]){
+    int r = 0;
+    for (int i = 0; s[i] != '\0'; i++){
+        if (s[i] >= 'A' && s[i] <= 'Z'){
+            s[i] += 32;
+            r++;
+        }
+    }
+    return r;
+}
+
+/**
+ * @brief Conta o numero de linhas de uma string
+ * 
+ * @param s string
+ * @return int numero de linhas
+ */
+int contalinhas (char s[]){
+    int r = 0;
+    int i;
+    for (i = 0;s[i] != '\0'; i++){
+        if (s[i] == '\n')
+            r++;
+    }
+    if (s[i] == '\0') //ultimo caracter
+        r++;
+    return r;
+}
+
+/**
+ * @brief Conta o numero de palavras numa string
+ * 
+ * @param s string
+ * @return int Numero de palavras
+ */
+int contaPal (char s[]){
+    int r = 0;
+    int i;
+    for (i = 0; s[i] != '\0'; i++){
+        if (isspace (s[i]))
+            r++;
+    }
+    if (s[i] == '\0') // ultimo caracter
+        r++;
+    return r;
+}
+
+/**
+ * @brief Procura uma string p num array de strings ps
+ * 
+ * @param p string a procurar
+ * @param ps array de strings
+ * @param N tamanho do array de strings
+ * @return int 1 se encontrou, 0 caso contrario
+ */
+int procura (char *p, char *ps[], int N){
+    int i, bool = 0;
+
+    for (i = 0; i < N; i++){
+        if (strcmp (ps[i],p) == 0)
+            bool = 1;
+    }
+    return bool;
+}
+
 /***************************************** Arrays ordenados *****************************************/
 
 // Exercicio 1
@@ -179,11 +253,12 @@ void merge (int a[], int na, int b[], int nb, int r[]){
 
 int main (){
    /*
-   char s[50] = "tass a trrollar cunha";
-   int r = duplicaVogais_v2(s);
+   char s[20] = "o simao e lindo";
+   char *m[20] = {"ola", "o simao lindo", "o simao"};
+   int r = procura(s,m,3);
 
-   printf("vogais duplicadas: %d\n", r);
-   printf(" String 1 : %s\n",s);
+   printf("bool: %d\n", r);
+   //printf(" String 1 : %s\n",s);
    */
    
    int v[6] = {1,5,12,-1,4,10};
