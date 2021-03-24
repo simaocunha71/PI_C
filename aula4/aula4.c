@@ -5,21 +5,32 @@
 
 /***************************************** Funçoes sobre strings *****************************************/
 
-int testaVogal (char s){
-    return s == 'a' || s == 'A' ||
-           s == 'e' || s == 'E' ||
-           s == 'i' || s == 'I' ||
-           s == 'o' || s == 'O' ||
-           s == 'u' || s == 'U';
+int testaVogal (char c){
+    return c == 'a' || c == 'A' ||
+           c == 'e' || c == 'E' ||
+           c == 'i' || c == 'I' ||
+           c == 'o' || c == 'O' ||
+           c == 'u' || c == 'U';
 }
 
 
 //Exercicio 1
-int contaVogais(char *s) {
+int contaVogais_v1(char *s) {
     int r = 0;
     for (int i = 0; s[i] != '\0'; i++){
         if (testaVogal(s[i]))
             r++;
+    }
+    return r;
+}
+
+int contaVogais_v2(char *s)
+{
+    int r = 0;
+    while (*s){
+        if (testaVogal(*s))
+            r++;
+        s++;
     }
     return r;
 }
@@ -104,31 +115,38 @@ int duplicaVogais_v1 (char *s){
 }
 
 // a corrigir
-int duplicaVogais_v2(char *s)
-{
-    int i, j = 0;
-    int num_dupl = 0;
+int duplicaVogais_v2(char *s){
+    int i=0,j,comp=0,vogais=0;
+    vogais = 0;
 
-    for (i = 0; s[i] != '\0'; i++)
-    {
+    // Calcular tamanhos
+    for (; s[i] != '\0'; i++){
+        comp++; // tamanho de s
         if (testaVogal(s[i]))
-        {
-
-            s[j] = s[i];
-            s[j + 1] = s[i];
-            j += 2;
-            num_dupl++;
-        }
-        else
-        {
-            s[j] = s[i];
-            j++;
-        }
+            vogais++; // numero de vogais em s
     }
 
-    s[j] = '\0';
+    //Processar a string
+    i = comp -1;
+    j = comp + vogais -1;
 
-    return num_dupl;
+    while (i >= 0){
+        if (testaVogal(s[i])){
+            s[j] = s[i];
+            j--;
+            s[j] = s[i];
+            j--;
+        }
+        else{
+            s[j] = s[i];
+            j--;
+        }
+        i--;
+    }
+
+    s[comp + vogais] = '\0';
+
+    return vogais;
 }
 
 ////////////////////////////// Extras //////////////////////////////////
@@ -252,19 +270,19 @@ void merge (int a[], int na, int b[], int nb, int r[]){
 }
 
 int main (){
-   /*
+   
    char s[20] = "o simao e lindo";
    char *m[20] = {"ola", "o simao lindo", "o simao"};
-   int r = procura(s,m,3);
+   int r = duplicaVogais_v2(s);
 
-   printf("bool: %d\n", r);
-   //printf(" String 1 : %s\n",s);
-   */
+   printf("numeros: %d\n", r);
+   printf(" String 1 : %s\n",s);
    
+   /*
    int v[6] = {1,5,12,-1,4,10};
    int v1[6] = {1,2,3,4,5,6};
    int b = ordenado(v,6);
    printf("bool: %d\n",b);
-    
+   */
    return 0;
 }
