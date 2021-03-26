@@ -192,15 +192,14 @@ int contalinhas (char s[]){
  * @param s string
  * @return int Numero de palavras
  */
-int contaPal (char s[]){
+int contaPal(char s[]){
     int r = 0;
     int i;
     for (i = 0; s[i] != '\0'; i++){
-        if (isspace (s[i]))
+        if (s[i] != ' ' && s[i] != '\n' && (s[i + 1] == ' ' || s[i + 1] == '\0'))
             r++;
     }
-    if (s[i] == '\0') // ultimo caracter
-        r++;
+
     return r;
 }
 

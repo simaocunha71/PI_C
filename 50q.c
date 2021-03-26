@@ -208,3 +208,86 @@ void truncW (char t[], int n){
 
     t[k] = '\0';
 }
+
+
+//17: Calcula o maior prefixo comum entre as 2 strings
+int maiorPrefixo(char s1[], char s2[]){
+    int i = 0, r = 0;
+    while (s1[i] != '\0' && s2[i] != '\0')
+    {
+        if (s1[i] == s2[i])
+            r++;
+        else
+            break;
+        i++;
+    }
+    return r;
+}
+
+//18: Calcula o maior sufixo comum entre 2 strings
+int maiorSufixo(char s1[], char s2[]){
+    int i, j, r = 0;
+
+    i = strlen(s1) - 1;
+    j = strlen(s2) - 1;
+    while (i >= 0 && j >= 0){
+        if (s1[i] == s2[j])
+            r++;
+        else
+            break;
+        i--; j--;
+    }
+    return r;
+}
+
+//19:Calcula o maior sufixo de s1 que é prefixo de s2
+int sufPref(char s1[], char s2[]){
+    int i, j = 0, r = 0;
+
+    for (i = 0; s1[i] != '\0'; i++){
+        if (s1[i] == s2[j]){
+            r++; // numero de caracteres iguais
+            j++; // percorre s2
+        }
+        else{ //caso contrario, volta tudo a 0 e avança um caracter em s1
+            r = j = 0;
+        }
+    }
+
+    return r;
+}
+
+//20: Conta o numero de palavras de uma string
+int contaPal(char s[])
+{
+    int r = 0;
+    int i;
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        if (s[i] != ' ' && s[i] != '\n' && (s[i + 1] == ' ' || s[i + 1] == '\0'))
+            r++;
+    }
+
+    return r;
+}
+
+//21: Conta o numero de vogais de uma string
+int testaVogal(char c)
+{
+    return c == 'a' || c == 'A' ||
+           c == 'e' || c == 'E' ||
+           c == 'i' || c == 'I' ||
+           c == 'o' || c == 'O' ||
+           c == 'u' || c == 'U';
+}
+
+int contaVogais(char *s)
+{
+    int r = 0;
+    for (int i = 0; s[i] != '\0'; i++)
+    {
+        if (testaVogal(s[i]))
+            r++;
+    }
+    return r;
+}
