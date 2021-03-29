@@ -209,6 +209,23 @@ void truncW (char t[], int n){
     t[k] = '\0';
 }
 
+//16: calcula o comprimento da maior sub-string com caracteres iguais
+int iguaisConsecutivos (char s[]) {
+    int i;
+    int iguaisConsec=1;
+    int maximo=0;
+
+    for (i=0; s[i]!= '\0'; i++){
+        if (s[i]==s[i+1])
+            iguaisConsec++;
+        else
+            iguaisConsec = 1;
+        
+        if (iguaisConsec > maximo)
+            maximo = iguaisConsec;
+    }
+    return maximo;
+}
 
 //17: Calcula o maior prefixo comum entre as 2 strings
 int maiorPrefixo(char s1[], char s2[]){
