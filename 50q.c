@@ -236,7 +236,7 @@ char charMaisfreq (char s[]) {
     return char_res;
 }
 
-//16: calcula o comprimento da maior sub-string com caracteres iguais
+//15: calcula o comprimento da maior sub-string com caracteres iguais
 int iguaisConsecutivos (char s[]) {
     int i;
     int iguaisConsec=1;
@@ -254,6 +254,23 @@ int iguaisConsecutivos (char s[]) {
     return maximo;
 }
 
+//16: calcula o comprimento da maior sub-string com caracteres diferentes /////////(A CORRIGIR)/////////
+int difConsecutivos (char s[]) {
+    int i;
+    int difConsec=1;
+    int maximo=0;
+
+    for (i=0; s[i]!= '\0'; i++){
+        if (s[i]!=s[i+1])
+            difConsec++;
+        else
+            difConsec = 1;
+        
+        if (difConsec > maximo)
+            maximo = difConsec;
+    }
+    return maximo;
+}
 //17: Calcula o maior prefixo comum entre as 2 strings
 int maiorPrefixo(char s1[], char s2[]){
     int i = 0, r = 0;
