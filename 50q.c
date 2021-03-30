@@ -398,3 +398,17 @@ int remRep (char texto []) {
     texto[r]='\0';
     return r;
 }
+//25: Remove os espaços consecutivos, mantendo apenas um espaço
+int limpaEspacos (char texto[]) {
+    int r=0,i;
+    
+    for(i=0;texto[i]!='\0';i++)
+        if(texto[i]!=' ' || 
+          (texto[i]==' ' && texto [i+1]!=' ')){
+            texto[r]=texto[i];                 
+            r++;
+          }
+          
+    texto[r] = '\0';
+    return r;
+}
