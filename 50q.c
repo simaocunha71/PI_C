@@ -374,3 +374,14 @@ int contida (char a[], char b[]) {
     }
     return bool;
 }
+
+//23: Verifica se uma string é palindroma (lê-se igual nos 2 sentidos)
+int palindroma (char s[]) {
+    int bool = 1;
+    int i;
+    int j=strlen (s)-1;
+    for (i = 0; i < j; i++,j--)
+        if (s[i] != s[j] )
+            bool = 0;
+    return bool;
+}
