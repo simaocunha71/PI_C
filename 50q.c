@@ -352,3 +352,25 @@ int contaVogais(char *s)
     }
     return r;
 }
+
+//22: testa se todos os caracteres da primeira string tambem aparecem na segunda
+int char_contido (char c, char s[]){
+    int i;
+    int bool = 0;
+    
+    for (i = 0; s[i] != '\0'; i++)
+        if (c == s[i])
+            bool = 1;
+    
+    return bool;
+}
+
+
+int contida (char a[], char b[]) {
+    int i,bool = 1;
+    for (i = 0; a[i] != '\0'; i++){
+        if (!char_contido (a[i],b))
+            bool = 0;
+    }
+    return bool;
+}
