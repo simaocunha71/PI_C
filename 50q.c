@@ -208,6 +208,33 @@ void truncW (char t[], int n){
 
     t[k] = '\0';
 }
+//14: calcula o caractere mais frequente numa string
+int freq (char c, char s[]){
+    int i,r=0;
+    for (i = 0; s[i] != '\0'; i++)
+        if (s[i]==c)
+            r++;
+    return r;
+}
+
+char charMaisfreq (char s[]) {
+    char char_res = ' ';
+    if (*s=='\0')
+        return 0;
+    else{
+        int i;
+        int aux = 0;
+        int max = 0;
+        for (i = 0; s[i] != '\0';i++){
+            aux = freq (s[i],s);
+            if (aux > max){
+                max=aux;
+                char_res =s[i];
+            }
+        }
+    }
+    return char_res;
+}
 
 //16: calcula o comprimento da maior sub-string com caracteres iguais
 int iguaisConsecutivos (char s[]) {
