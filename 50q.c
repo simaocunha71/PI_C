@@ -385,3 +385,16 @@ int palindroma (char s[]) {
             bool = 0;
     return bool;
 }
+
+//24: Remove caracteres repetidos consecutivos de uma string
+int remRep (char texto []) {
+    int i, r = 0;
+    for (i=0; texto[i] != '\0'; i++){
+        if (texto[i] != texto[i+1]){
+            texto[r] = texto[i];  
+            r++;
+        }
+    }
+    texto[r]='\0';
+    return r;
+}
