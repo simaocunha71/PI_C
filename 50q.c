@@ -421,3 +421,19 @@ void insere (int v[], int N, int x){
     }
     v[j+1] = x;
 }
+
+//27:dados vectores ordenados a (com na elementos) e b (com nb elementos), preenche o vector r (com na+nb elementos) com os elementos de a e b ordenados
+void merge (int r [], int a[], int b[], int na, int nb){
+    int i = 0, j = 0, indice = 0;
+    
+    while(indice < na + nb) {
+        if((a[i] < b[j] && i < na) || j >= nb){
+            r[indice] = a[i];
+            indice++; i++;
+        }
+        else{
+            r[indice] = b[j];
+            indice++; j++;
+        }    
+    }
+}
