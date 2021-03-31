@@ -416,7 +416,7 @@ int limpaEspacos (char texto[]) {
 void insere (int v[], int N, int x){
     int j;
     //Empurra-se todos os elementos para a frente até chegarmos à posiçao onde temos de inserir x
-    for (j=N-1; j >= 0 && v[j] > x; j--){
+    for (j=N-1; j >= 0 && v[j] > x; j--){ // j = N-1 porque na posiçao N o array ja está ordenado (por ter apenas um elemento)
         v[j+1] = v[j];
     }
     v[j+1] = x;
