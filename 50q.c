@@ -424,16 +424,34 @@ void insere (int v[], int N, int x){
 
 //27:dados vectores ordenados a (com na elementos) e b (com nb elementos), preenche o vector r (com na+nb elementos) com os elementos de a e b ordenados
 void merge (int r [], int a[], int b[], int na, int nb){
-    int i = 0, j = 0, indice = 0;
-    
-    while(indice < na + nb) {
-        if((a[i] < b[j] && i < na) || j >= nb){
-            r[indice] = a[i];
+    int i=0;
+    int j=0;
+    int indice=0;
+    while(i<na || j<nb){
+        if(i==na){                   
+            r[indice]=b[j];
+            indice++; j++;
+        }
+        else if(j==nb){
+            r[indice]=a[i];
+            indice++; i++;
+        }
+        else if(a[i]<b[j]){
+            r[indice]=a[i];
             indice++; i++;
         }
         else{
-            r[indice] = b[j];
+            r[indice]=b[j];
             indice++; j++;
-        }    
-    }
+        }
+     }
+}
+//28: Testa se um array de inteiros está ordenado entre 2 indices
+int crescente (int a[], int i, int j){
+       int bool=1;
+       for (; i < j; i++){            
+           if (a[i] > a[i+1])
+            bool=0;
+       }
+    return bool;
 }
