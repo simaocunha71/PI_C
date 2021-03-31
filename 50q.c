@@ -412,3 +412,12 @@ int limpaEspacos (char texto[]) {
     texto[r] = '\0';
     return r;
 }
+//26: insere um elemento (x) num vector ordenado
+void insere (int v[], int N, int x){
+    int j;
+    //Empurra-se todos os elementos para a frente até chegarmos à posiçao onde temos de inserir x
+    for (j=N-1; j >= 0 && v[j] > x; j--){
+        v[j+1] = v[j];
+    }
+    v[j+1] = x;
+}
