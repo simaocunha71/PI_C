@@ -455,3 +455,21 @@ int crescente (int a[], int i, int j){
        }
     return bool;
 }
+
+//29: Retira todos os elementos negativos, retornando o numero de elementos mantidos
+int retiraNeg (int v[], int N){
+    int i,j,r=0;
+    int aux[N];
+    
+    for (i = 0; i < N; i++){
+        if (v[i] >= 0){
+            aux[r] = v[i];
+            r++;
+        }
+    }
+    
+    for (j = 0; j < N; j++)
+        v[j] = aux[j];
+    
+    return r;
+}
