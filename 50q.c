@@ -474,6 +474,33 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+
+
+
+
+//47:dada uma posiçao inicial e um array com N movimentos, calcula a posiçao final do robot depois de efectuar essa sequencia de movimentos
+typedef enum movimento {
+    Norte, Oeste, Sul, Este
+} Movimento;
+
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+Posicao posFinal (Posicao inicial, Movimento mov[], int N){
+    for (int i=0; i<N; i++){
+        if (mov[i]==Norte)
+            inicial.y +=1;
+        else if (mov[i]==Sul)
+            inicial.y -=1;
+        else if (mov[i]==Oeste)
+            inicial.x -=1;
+        else 
+            inicial.x +=1;
+    }
+    return inicial;
+}
+
 //48:dadas as posiçoes inicial e final do robot, preenche o array com os movimentos suficientes para que o robot passe de uma posiçao para a outra
 typedef enum movimento {
     Norte, Oeste, Sul, Este
@@ -519,11 +546,10 @@ typedef struct posicao {
 } Posicao;
 
 int maiscentral (Posicao pos[], int N) {
-    int i;
     int r = 0;
     int distMin = (abs(pos[0].x) + abs(pos[0].y));
     
-    for (i=0; i<N; i++){
+    for (int i=0; i<N; i++){
         if ((abs(pos[i].x) + abs(pos[i].y)) < distMin){
             distMin = (abs(pos[i].x) + abs(pos[i].y));
             r = i;
@@ -542,8 +568,8 @@ typedef struct posicao {
 } Posicao;
 
 int vizinhos (Posicao p, Posicao pos[], int N) {
-    int i, r=0;
-    for (i=0; i<N; i++)
+    int r=0;
+    for (int i=0; i<N; i++)
         if ( abs(pos[i].x - p.x) + abs(pos[i].y - p.y) == 1)
             r++;
     return r;
