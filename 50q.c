@@ -473,6 +473,26 @@ int retiraNeg (int v[], int N){
     
     return r;
 }
+
+//49:dado um array com N posicoes, determina o ındice da posicao que esta mais perto da origem
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+int maiscentral (Posicao pos[], int N) {
+    int i;
+    int r = 0;
+    int distMin = (abs(pos[0].x) + abs(pos[0].y));
+    
+    for (i=0; i<N; i++){
+        if ((abs(pos[i].x) + abs(pos[i].y)) < distMin){
+            distMin = (abs(pos[i].x) + abs(pos[i].y));
+            r = i;
+        }
+    }
+    
+    return r;
+}
 //50:dada uma posicao e um array com N posicoes, calcula quantas dessas posicoes sao adjacentes a posicao dada
 typedef struct posicao {
     int x, y;
