@@ -477,6 +477,13 @@ int retiraNeg (int v[], int N){
 
 
 
+//46:calcula a numero de elementos do multi-conjunto v
+int cardinalMSet (int N, int v[N]){
+    int i,c=0;
+    for (i = 0; i < N; i++)
+        c+=v[i];
+    return c;
+}
 
 //47:dada uma posiçao inicial e um array com N movimentos, calcula a posiçao final do robot depois de efectuar essa sequencia de movimentos
 typedef enum movimento {
