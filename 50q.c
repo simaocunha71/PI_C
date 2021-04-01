@@ -473,3 +473,15 @@ int retiraNeg (int v[], int N){
     
     return r;
 }
+//50:dada uma posicao e um array com N posicoes, calcula quantas dessas posicoes sao adjacentes a posicao dada
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+int vizinhos (Posicao p, Posicao pos[], int N) {
+    int i, r=0;
+    for (i=0; i<N; i++)
+        if ( abs(pos[i].x - p.x) + abs(pos[i].y - p.y) == 1)
+            r++;
+    return r;
+}
