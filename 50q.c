@@ -474,7 +474,46 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+//48:dadas as posiçoes inicial e final do robot, preenche o array com os movimentos suficientes para que o robot passe de uma posiçao para a outra
+typedef enum movimento {
+    Norte, Oeste, Sul, Este
+} Movimento;
+
+typedef struct posicao {
+    int x, y;
+} Posicao;
+
+int caminho (Posicao inicial, Posicao final, Movimento mov[], int N){
+    for (int i = 0; inicial.x != final.x || inicial.y != final.y; i++){
+        if (inicial.y > final.y){
+            inicial.y--;
+            mov[i] = Sul;
+        }
+        else if (inicial.y < final.y){
+            inicial.y++;
+            mov[i] = Norte;
+        }
+        else if (inicial.x > final.x){
+            inicial.x--;
+            mov[i] = Oeste;
+        }
+        else{
+            inicial.x++;
+            mov[i] = Este;
+        }
+    }
+    
+    if (i>N) 
+        return -1;
+    else
+        return i;
+}
+
 //49:dado um array com N posicoes, determina o ındice da posicao que esta mais perto da origem
+typedef enum movimento {
+    Norte, Oeste, Sul, Este
+} Movimento;
+
 typedef struct posicao {
     int x, y;
 } Posicao;
@@ -494,6 +533,10 @@ int maiscentral (Posicao pos[], int N) {
     return r;
 }
 //50:dada uma posicao e um array com N posicoes, calcula quantas dessas posicoes sao adjacentes a posicao dada
+typedef enum movimento {
+    Norte, Oeste, Sul, Este
+} Movimento;
+
 typedef struct posicao {
     int x, y;
 } Posicao;
