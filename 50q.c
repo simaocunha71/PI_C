@@ -475,7 +475,19 @@ int retiraNeg (int v[], int N){
 }
 
 
-
+//45:coloca no array r o resultado da união dos multi-conjuntos v1 e v2
+int unionMSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for (i = 0; i < N; i++){
+        if (v1[i] == v2[i])
+            r[i] = v1[i]; //indiferente escolher v1 ou v2
+        else if (v1[i] < v2[i])
+            r[i] = v2[i]; //escolher o array maior
+        else
+            r[i] = v1[i];
+    }
+    return 0;
+}
 
 //46:calcula a numero de elementos do multi-conjunto v
 int cardinalMSet (int N, int v[N]){
