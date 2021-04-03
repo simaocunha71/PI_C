@@ -474,6 +474,19 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+
+//37: dado um vector v com n inteiros, retorna o indice do menor elemento do vector
+int minInd (int v[], int n) {
+   int i, r = 0, min = v[0];
+   for (i = 0; i < n; i++){
+       if (v[i] < min){
+           min = v[i];
+           r = i;
+       }
+   }
+   return r;
+}
+
 //38:preenche o vector Ac com as somas acumuladas do vector v. 
 //   Por exemplo, na posiçao Ac[3] deve ser calculado como v[0]+v[1]+v[2]+v[3]
 void somasAc (int v[], int Ac [], int N){
