@@ -474,7 +474,15 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
-
+//41: Soma 2 matrizes
+void addTo(int N, int M, int a [N][M], int b[N][M]) {
+    int i,j;
+    for (i = 0; i < N; i++){
+        for (j = 0; j < M; j++){
+            a[i][j]+=b[i][j];
+        }
+    }
+}
 
 //42: coloca no array r o resultado da uniao dos conjuntos v1 e v2
 int unionSet (int N, int v1[N], int v2[N], int r[N]){
