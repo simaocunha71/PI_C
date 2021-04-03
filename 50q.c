@@ -475,8 +475,24 @@ int retiraNeg (int v[], int N){
 }
 
 
+//35:calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum.
+//   Assuma que os vectores a e b estao ordenados por ordem crescente
+int comunsOrd (int a[], int na, int b[], int nb){
+    int i,j,r;
+    i = j = r = 0;
+    while (i < na && j < nb){
+        if (a[i] > b[j])
+            j++;
+        else if (a[i] < b[j])
+            i++;
+        else{
+            i++; j++;r++;
+        }
+    }
+    return r;
+}
 
-//36: e calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum. 
+//36: calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum. 
 //    Assuma que os vectores a e b nao estao ordenados e defina a funçao sem alterar os vectores.
 int pertence (int x, int v[],int N){
     int i;
