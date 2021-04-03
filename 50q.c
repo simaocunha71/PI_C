@@ -474,6 +474,19 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+
+//40: Calcula a matriz transposta
+void transposta (int N, float m [N][N]) {
+    int i,j,aux;
+    for (i = 0; i < N; i++){
+        for (j = 0; j < i; j++){
+            aux = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = aux;
+        }
+    }
+}
+
 //41: Soma 2 matrizes
 void addTo(int N, int M, int a [N][M], int b[N][M]) {
     int i,j;
