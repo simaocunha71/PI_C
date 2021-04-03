@@ -474,6 +474,32 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+
+
+//42: coloca no array r o resultado da uniao dos conjuntos v1 e v2
+int unionSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for (i=0; i<N; i++){
+        if (v1[i] > v2[i])
+            r[i] = v1[i];
+        else
+            r[i] = v2[i];
+    }
+    return 0;
+}
+
+//43: coloca no array r o resultado da interseçao dos conjuntos v1 e v2
+int intersectSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for (i=0; i<N; i++){
+        if (v1[i] == v2[i])
+            r[i] = v1[i];
+        else
+            r[i] = 0;
+    }
+    return 0;
+}
+
 //44: coloca no array r o resultado da interseção dos multi-conjuntos v1 e v2 
 //{0,3,0,0,1,0,0,3} -> {1, 1, 1, 4, 7, 7, 7}
 //{0,2,0,0,1,0,0,3} -> {1, 1   , 4, 7, 7, 7}
