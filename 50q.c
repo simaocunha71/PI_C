@@ -474,6 +474,16 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+//38:preenche o vector Ac com as somas acumuladas do vector v. 
+//   Por exemplo, na posiçao Ac[3] deve ser calculado como v[0]+v[1]+v[2]+v[3]
+void somasAc (int v[], int Ac [], int N){
+   int i,soma = 0;
+   for (i = 0; i < N; i++){
+       soma += v[i];
+       Ac[i] = soma;
+   }
+}
+
 //39: Testa se uma matriz é triangular superior
 int triSup (int N, int m [N][N]) {
     int i,j,bool = 1;
