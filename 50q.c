@@ -474,6 +474,17 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+//39: Testa se uma matriz é triangular superior
+int triSup (int N, int m [N][N]) {
+    int i,j,bool = 1;
+    for (i = 1; i < N; i++){
+        for (j = 0; j < i; j++){
+            if (m[i][j] != 0)
+                bool = 0;
+        }
+    }
+    return bool;
+}
 
 //40: Calcula a matriz transposta
 void transposta (int N, float m [N][N]) {
