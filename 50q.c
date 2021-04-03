@@ -475,6 +475,27 @@ int retiraNeg (int v[], int N){
 }
 
 
+
+//36: e calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum. 
+//    Assuma que os vectores a e b nao estao ordenados e defina a funçao sem alterar os vectores.
+int pertence (int x, int v[],int N){
+    int i;
+    for (i = 0; i < N; i++){
+        if (v[i] == x)
+            return 1;
+    }
+    return 0;
+}
+
+int comuns (int a[], int na, int b[], int nb){
+    int i,j,r=0;
+    for (i = j = 0; i < na && j < nb; i++,j++){
+        if (pertence (a[i],a,na) == pertence (a[i],b,nb) == 1)
+            r++;
+    }
+    return r;
+}
+
 //37: dado um vector v com n inteiros, retorna o indice do menor elemento do vector
 int minInd (int v[], int n) {
    int i, r = 0, min = v[0];
