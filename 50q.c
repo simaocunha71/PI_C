@@ -475,6 +475,25 @@ int retiraNeg (int v[], int N){
 }
 
 
+
+//32: Calcula o comprimento da maior sequencia crescente de elementos consecutivos num vector v com N elementos
+int maxCresc (int v[], int N) {
+    int i, r = 0,aux =1;
+    for (i = 0; i < N; i++){
+        if (v[i] <= v[i+1])
+            aux++;
+        else
+            aux = 1;
+            
+        if (aux > r)
+            r = aux;
+    }
+    return r;
+}
+
+
+
+
 //35:calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum.
 //   Assuma que os vectores a e b estao ordenados por ordem crescente
 int comunsOrd (int a[], int na, int b[], int nb){
