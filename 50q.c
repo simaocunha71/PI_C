@@ -561,6 +561,28 @@ int elimRep (int v[], int N) {
 
 //34: recebe um vector v com n inteiros ordenado por ordem crescente e elimina as repetiçoes. A funçao deverá retornar o numero de elementos do vector resultante. 
 
+// Existe o valor x repetido no array v até ao indice j
+// 1 -> nao existe repetido
+// 0 -> existe repetido
+int existeRepetido (int x,int v[], int j){
+    int i, bool = 1;
+    for (i = 0; i < j; i++)
+        if (x == v[i])
+            bool = 0;
+    return bool;
+}
+
+int elimRepOrd (int v[], int N) {
+    int i, r = 0;
+    
+    for (i = 0; i < N; i++){
+        if (existeRepetido (v[i],v,i)){
+            v[r] = v[i];
+            r++;
+        }
+    }
+    return r;
+}
 
 //35:calcula quantos elementos os vectores a (com na elementos) e b (com nb elementos) têm em comum.
 //   Assuma que os vectores a e b estao ordenados por ordem crescente
