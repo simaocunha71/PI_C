@@ -474,6 +474,49 @@ int retiraNeg (int v[], int N){
     return r;
 }
 
+//30: recebe um vector v com N elementos ordenado por ordem crescente e retorna o menos frequente dos elementos do vector
+int menosFreq (int v[], int N){
+    int i, j;
+    int frequencia;
+    int elemento = v[0];
+    int minFreq=N;
+    
+    for (i=0; i<N; i++){
+        frequencia = 0;
+        for (j=0; j<N; j++)
+            if (v[i]==v[j])
+                frequencia++;                                   
+        
+        if (frequencia < minFreq){
+            minFreq = frequencia;
+            elemento = v[i];
+        }
+    }
+
+    return elemento;
+}
+
+//31: recebe um vector v com N elementos ordenado por ordem crescente e retorna o mais frequente dos elementos do vector
+int maisFreq (int v[], int N){
+    int i, j;
+    int frequencia;
+    int elemento = v[0];
+    int maxFreq=0;
+    
+    for (i=0; i<N; i++){
+        frequencia = 0;
+        for (j=0; j<N; j++)
+            if (v[i]==v[j])
+                frequencia++;                                   
+        
+        if (frequencia > maxFreq){
+            maxFreq = frequencia;
+            elemento = v[i];
+        }
+    }
+
+    return elemento;
+}
 
 
 //32: Calcula o comprimento da maior sequencia crescente de elementos consecutivos num vector v com N elementos
