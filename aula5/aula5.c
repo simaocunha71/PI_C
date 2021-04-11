@@ -8,7 +8,7 @@ typedef struct aluno{
     float teste;
 } Aluno;
 
-//Exercicio 1
+//////////////////////////////////////////// Exercicio 1 ////////////////////////////////////////////
 
 /**
  * @brief Calcula a nota obtida na componente dos minitestes (0 a 20)
@@ -41,7 +41,7 @@ int nota(Aluno a){
         return 0;
 }
 
-// Exercicio 2
+//////////////////////////////////////////// Exercicio 2 ////////////////////////////////////////////
 
 /**
  * @brief Verifica se um dado numero n é igual ao numero de aluno
@@ -65,7 +65,7 @@ int procuraNum (int num, Aluno t[], int N){
     return -1;
 }
 
-// Exercicio 3
+//////////////////////////////////////////// Exercicio 3 ////////////////////////////////////////////
 
 /**
  * @brief Devolve o numero de um aluno
@@ -120,27 +120,7 @@ void ordenaPorNum(Aluno t[], int N){
     }
 }
 
-//Exercicio 4
+//////////////////////////////////////////// Exercicio 4 ////////////////////////////////////////////
 
 
 
-
-
-
-
-void printArray (int v[],int N){
-    for (int i = 0; i < N; i++)
-        printf("%d ",v[i]);
-    printf("\n");
-}
-
-
-int main (){
-    //Aluno s = {8420, "Simao", {2, 1, 2, 1, 1, 1}, 6.0};
-    int v[10] = {1,7,6,8,10,12,42,102,5,3};
-    maxSort(v,10);
-    //insertionSort(v,10);
-    printArray (v,10);
-
-    return 0;
-}
