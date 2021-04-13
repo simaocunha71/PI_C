@@ -44,22 +44,17 @@ int nota(Aluno a){
 //////////////////////////////////////////// Exercicio 2 ////////////////////////////////////////////
 
 /**
- * @brief Verifica se um dado numero n é igual ao numero de aluno
- * @param n numero
- * @param a numero de aluno
- * @return int 1 de sao iguais, 0 caso contrário
+ * @brief Retorna o indice do aluno do array t cujo numero é igual a num
+ * 
+ * @param num Numero e verificar
+ * @param t Array de alunos
+ * @param N Tamanho do array de alunos
+ * @return int Indice do aluno
  */
-int igualNumero (int n, Aluno a){
-    int bool = 0;
-    if (n == a.numero)
-        bool = 1;
-    return bool;
-}
-
 int procuraNum (int num, Aluno t[], int N){
     int i;
     for (i = 0; i < N; i++){
-        if (igualNumero (num,a))
+        if (num == t[i].numero)
             return i;
     }
     return -1;
@@ -69,7 +64,6 @@ int procuraNum (int num, Aluno t[], int N){
 
 /**
  * @brief Devolve o numero de um aluno
- * 
  * @param a Struct a
  * @return int Numero de aluno
  */
@@ -122,5 +116,48 @@ void ordenaPorNum(Aluno t[], int N){
 
 //////////////////////////////////////////// Exercicio 4 ////////////////////////////////////////////
 
+/**
+ * @brief Copia o array t1 para t2
+ * @param t1 Array original
+ * @param t2 Array copia
+ * @param N Tamanho do array t1
+ */
+void copia(Aluno t1[], Aluno t2[], int N){
+    for (int i = 0; i < N; i++){
+        t2[i].numero = t1[i].numero;
+        strcpy(t2[i].nome, t1[i].nome);
+        for (int j = 0; j < 6; j++)
+            t2[i].miniT[j] = t1[i].miniT[j];
+        t2[i].teste = t1[i].teste;
+    }
+}
 
+/**
+ * @brief Inicializa o array ind a 0 
+ * @param ind Array a inicializar
+ * @param N Tamanho do array
+ */
+void init_ind(int ind[], int N){
+    for (int i = 0; i < N; i++)
+        ind[i] = 0;
+}
 
+/**
+ * @brief Preenche o array ind com os indices do array t consoante uma ordenaçao por numero de aluno
+ * @param t Array de alunos
+ * @param N Tamanho do array aluno
+ * @param ind Array de indices 
+ */
+void criaIndPorNum(Aluno t[], int N, int ind[]){
+    Aluno aux[N];
+
+    copia(t, aux, N);
+    init_ind(ind, N);
+
+    ordenaPorNum(aux, N);
+
+    for (int k = 0; k < N; k++){
+        int indice = procuraNum(t[k].numero, aux, N);
+        ind[indice] = k;
+    }
+}
