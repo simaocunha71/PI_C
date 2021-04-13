@@ -45,7 +45,6 @@ int nota(Aluno a){
 
 /**
  * @brief Retorna o indice do aluno do array t cujo numero é igual a num
- * 
  * @param num Numero e verificar
  * @param t Array de alunos
  * @param N Tamanho do array de alunos
@@ -161,3 +160,32 @@ void criaIndPorNum(Aluno t[], int N, int ind[]){
         ind[indice] = k;
     }
 }
+
+//////////////////////////////////////////// Exercicio 5 ////////////////////////////////////////////
+
+/**
+ * @brief Dado um aluno, imprime os seus dados
+ * @param a Aluno a imprimir
+ */
+void print_aluno (Aluno a){
+    printf("Nome: %s (nº%d) | Teste: %f | Minitestes: ", a.nome, a.numero, a.teste);
+    for (int i = 0; i < 6; i++)
+        printf("%d ", a.miniT[i]);
+    printf("\n");
+}
+
+/**
+ * @brief Dados um array de alunos e um array de indices que resulta da ordenação do array de alunos,
+ * imprime a turma, tendo em conta os indices do array ind
+ * @param ind Array de indices que resulta da ordenaçao de t
+ * @param t Array de alunos
+ * @param N Tamanho do array de alunos
+ */
+void imprimeTurmaInd(int ind[], Aluno t[], int N){
+    for (int i = 0; i < N; i++){
+        int indice_a_imprimir = ind[i];
+        print_aluno(t[indice_a_imprimir]);
+    }
+}
+
+//////////////////////////////////////////// Exercicio 6 ////////////////////////////////////////////
