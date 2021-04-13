@@ -189,3 +189,80 @@ void imprimeTurmaInd(int ind[], Aluno t[], int N){
 }
 
 //////////////////////////////////////////// Exercicio 6 ////////////////////////////////////////////
+int procuraNum_com_Ind (int ind[], int num, Aluno t[], int N){
+    return procuraNum(num,t,N);
+}
+
+//////////////////////////////////////////// Exercicio 7 ////////////////////////////////////////////
+
+// Copia t1 para t2
+void copia(Aluno t1[], Aluno t2[], int N){
+    int i,j;
+    for (i = 0; i < N; i++){
+        t2[i].numero = t1[i].numero;
+        strcpy(t2[i].nome, t1[i].nome);
+        for (j = 0; j < 6; j++)
+            t2[i].miniT[j] = t1[i].miniT[j];
+        t2[i].teste = t1[i].teste;
+    }
+}
+
+//Inicializa ind
+void init_ind(int ind[], int N){
+    int i;
+    for (i = 0; i < N; i++)
+        ind[i] = 0;
+}
+
+//Calcula o indice da maior string nome lexicografica
+int maxInd(Aluno t[], int N){
+    int i, r = 0;
+    for (i = 1; i < N; i++){
+        if (strcmp (t[i].nome ,t[r].nome) > 0)
+            r = i;
+    }
+    return r;
+}
+
+//Troca 2 alunos
+void swap(Aluno t[], int i, int j){
+    Aluno temp = t[i];
+    t[i] = t[j];
+    t[j] = temp;
+}
+
+//Ordenar array t por nome (maxSort)
+void ordenaPorNome(Aluno t[], int N){
+    int x, indiceMaior;
+    for (x = N; x > 0; x--){
+        indiceMaior = maxInd(t, x);
+        swap(t, x - 1, indiceMaior);
+    }
+}
+
+//Dado um nome, devolve o indice onde esse nome ocorre
+int procuraNome (char* nome, Aluno t[], int N){
+    int i;
+    for (i = 0; i < N; i++){
+        if (strcmp (nome,t[i].nome) == 0)
+            return i;
+    }
+    return -1;
+}
+
+//Preenche o array ind com a ordenação de t de acordo com o seu valor lexicografico 
+void criaIndPorNome(Aluno t[], int N, int ind[]){
+    Aluno aux[N];
+
+    copia(t, aux, N);
+    init_ind(ind, N);
+
+    ordenaPorNome(aux, N);
+    
+    int k,indice;
+    
+    for (k = 0; k < N; k++){
+        indice = procuraNome(t[k].nome, aux, N);
+        ind[indice] = k;
+    }
+}
