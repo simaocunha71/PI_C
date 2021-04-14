@@ -20,7 +20,7 @@ int notaMiniTestes(int miniT[6]){
     int i , r = 0;
     for (i = 0; i < 6; i++)
         r += miniT[i];
-    r*=2;
+    r=r * 10 / 6;
     return r;
 }
 
