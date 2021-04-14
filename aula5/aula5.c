@@ -113,6 +113,28 @@ void ordenaPorNum(Aluno t[], int N){
         swap(t,x-1,indiceMaior);
     }
 }
+/*
+------ Algoritmo bubbleSort ------
+void ordenaPorNum (Aluno t [], int N){
+    int p;
+    int trocas = 1;
+    Aluno aux;
+
+    while(trocas){
+       trocas = 0;
+       p = 0;
+       while(p < N-1){
+           if(t[p].numero > t[p+1].numero) {
+                aux = t[p];
+                t[p] = t[p+1];
+                t[p+1] = aux;
+                trocas = 1;
+            }
+           p++;
+       }
+   }
+}
+*/
 
 //////////////////////////////////////////// Exercicio 4 ////////////////////////////////////////////
 
