@@ -43,19 +43,21 @@ int nota(Aluno a){
 //////////////////////////////////////////// Exercicio 2 ////////////////////////////////////////////
 
 /**
- * @brief Retorna o indice do aluno do array t cujo numero é igual a num
+ * @brief Retorna o indice do aluno do array t cujo numero é igual a num. Aproveita o facto de t estar ordenado
  * @param num Numero e verificar
  * @param t Array de alunos
  * @param N Tamanho do array de alunos
  * @return int Indice do aluno
  */
-int procuraNum (int num, Aluno t[], int N){
-    int i;
-    for (i = 0; i < N; i++){
-        if (num == t[i].numero)
-            return i;
+int procuraNum (int num, Aluno t[], int N) {
+    int i = 0;
+    int res = -1;
+    while(i < N){
+        if (t[i].numero == num) res = i;
+        else if (t[i].numero < num) i = N;
+        i++;
     }
-    return -1;
+    return res;
 }
 
 //////////////////////////////////////////// Exercicio 3 ////////////////////////////////////////////
