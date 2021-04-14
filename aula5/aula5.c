@@ -31,9 +31,8 @@ int notaMiniTestes(int miniT[6]){
  * @return int Nota final
  */
 int nota(Aluno a){
-    int r = 0.0;
     int notaM = notaMiniTestes(a.miniT); // nao escrever a.miniT[6], dá erro
-    r = r + notaM*0.3 + a.teste * 0.7;
+    int r = notaM*0.3 + a.teste * 0.7;
 
     if (notaM >= 8.0 && a.teste >= 8.0 && r >= 9.5)
         return r;
