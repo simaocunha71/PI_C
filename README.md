@@ -7,4 +7,5 @@ FICHA2: Algoritmos Numéricos sobre inteiros
 FICHA3: Vetores de inteiros
 FICHA4: Strings e arrays ordenados
 FICHA5: Structs e ordenações
+FICHA6: Buffers
 ```
