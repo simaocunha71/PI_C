@@ -28,3 +28,16 @@ void imprimeL (LInt l){
 }
 
 // Exercicio 54 - Inverte uma lista ligada
+Int reverseL (LInt l){
+    LInt prev = NULL;
+    LInt next;
+    
+    while (l!=NULL){
+        next = l->prox;
+        l->prox = prev;
+        prev = l;
+        l = next;
+    }
+    l = prev;
+    return l;
+}
