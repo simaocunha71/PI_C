@@ -89,3 +89,66 @@ void merge (LInt *r, LInt a, LInt b){
         merge (&((*r)->prox), a, b->prox);
     }
 }
+
+//Exercicio 58 - dada uma lista ligada l e um inteiro x, parte a lista em duas (retornando os endereços dos primeiros elementos da lista em *mx e *Mx): 
+//uma com os elementos de l menores do que x e a outra com os restantes. 
+void splitQS (LInt l, int x, LInt *mx, LInt *Mx){
+    if (l != NULL){
+        if (l->valor < x){
+            *mx = l;
+            (*Mx) = NULL;
+            splitQS(l->prox,x,&((*mx)->prox),Mx);
+            
+        }
+        else{
+            *Mx = l;
+            (*mx)=NULL;
+            splitQS(l->prox,x,mx,&((*Mx)->prox));   
+        }      
+    }
+}
+
+//Exercicio 59 - parte uma lista não vazia *l a meio. Se x contiver os elementos {1,2,3,4,5}, após a invocaçao y=parteAmeio(&x) a 
+//lista y deverá conter os elementos {1,2} e a lista x os restantes {3,4,5}
+int length (LInt l){
+    int r = 0;
+    while (l!=NULL){
+        r++;
+        l = l->prox;
+    }
+    return r;
+}
+
+LInt parteAmeio (LInt *l){
+    int half = length(*l)/2;
+    if(half == 0) 
+        return NULL;
+    LInt y = *l;
+    LInt aux = NULL;
+    int i;
+    for(i = 0; i < half; i++){
+        aux=(*l);
+        (*l) = (*l)->prox;
+    }
+    aux->prox = NULL;
+    return y;
+}
+//Exercicio 60 - remove todas as ocorrencias de um dado inteiro de uma lista, retornando o numero de celulas removidas.
+int removeAll (LInt *l, int x){
+    int rmv = 0;
+    LInt aux = *l;
+    LInt prev = NULL;
+    while (aux != NULL) {
+        if(aux->valor == x) {
+            if (prev != NULL)
+                prev->prox = aux->prox; //prev aponta para o proximo elemento de aux (excluindo o elemento repetido)
+            else
+                *l = aux->prox; //lista original aponta para o proximo elemento de aux (excluindo o elemento repetido)
+            rmv++;
+            free(aux); //liberta-se o nó que é repetido
+        }
+        else
+            prev = aux;
+        aux = aux->prox;
+    }
+    return rmv;
