@@ -11,4 +11,5 @@ FICHA4: Strings e arrays ordenados
 FICHA5: Structs e ordenações
 FICHA6: Buffers
 FICHA7: Listas
+FICHA8: Buffers implementados em lista
 ```
