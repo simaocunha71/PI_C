@@ -82,13 +82,23 @@ struct nodo *procura (ABin a, int x){
 
 //alinea(b) - calcula o nivel a que o elemento ocorre na arvore (-1 caso nao exista) - CORRIGIR
 int nivel (ABin a, int x){
-    if (x == a->valor)
+    if (a == NULL)
+        return -1;
+    else if (x == a->valor)
         return 0;
-    else if (x > a->valor)
-        return 1 + nivel(a->esq,x);
+    else{
+        double n;
+        if (x > a->valor)
+            n = nivel(a->dir,x);
+        else
+            n = nivel(a->esq,x);
+        
+   
+    if(n==-1)
+        return -1;
     else
-        return 1 + nivel(a->dir,x);
-    return -1;
+        return 1+n;
+    }
 }
 
 //alinea(c) - e imprime no ecran, por ordem crescente, todos os elementos da arvore que sao (estritamente) menores do que um dado valor - CORRIGIR
