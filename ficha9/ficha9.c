@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct nodo {
     int valor;
@@ -30,21 +31,20 @@ int altura (ABin a){
 
 //alinea (b) - calcula o numero de folhas (i.e., nodos cujas sub-arvores sao ambas vazias).
 int nFolhas (ABin a){
-    if (a == NULL)
-        return 0;
-    else if (a->esq == NULL || a->dir == NULL)
-        return 1;
-    else
-        return 1 + nFolhas (a->esq) + nFolhas (a->dir);
+    int r = 0;
+    if (a != NULL){
+        if (a->esq == NULL && a->dir == NULL)
+            r = 1;
+        else
+            r = nFolhas(a->esq) + nFolhas(a->dir);
+    }
+    return r;
 }
 
 //alinea (c) - calcula o nodo mais a esquerda de uma arvore
 ABin maisEsquerda (ABin a){
-    while(a != NULL){
-        if (a->esq == NULL) 
-            break;
-        a=a->esq;
-    } 
+    while (a != NULL && a->esq != NULL)
+        a = a->esq;
     return a;
 }
 
@@ -52,13 +52,67 @@ ABin maisEsquerda (ABin a){
 void imprimeNivel (ABin a, int l){
     if (a == NULL)
         printf("NULL ");
-    else if (l == 1)
+    else if (l == 0)
         printf("%d ",a->valor);
     else{
         imprimeNivel (a->esq,l-1);
         imprimeNivel (a->dir,l-1);
     }
 }
+////////////////////////////////////////////////////////////////////////////////////////
+/*
+                                Travessias em árvores binárias
+
+                 23
+              /      \
+            15         34
+           / \        /  \ 
+          6   18     29   45
+              /       \
+             16       31
+
+inorder:    6 15 16 18 23 29 31 34 45
+postorder:  6 16 18 15 31 29 45 34 23
+preorder:  23 15  6 18 16 34 29 31 45 
+*/
+
+//Esq - Raiz - Dir
+void inorder (ABin a){
+    if (a!=NULL){
+        inorder(a->esq);
+        printf("%d ", a->valor);
+        inorder(a->dir);
+    }
+}
+
+//Raiz - Esq - Dir
+void preorder (ABin a){
+    if (a!=NULL){
+        printf("%d ", a->valor);
+        preorder(a->esq);
+        preorder(a->dir);
+    }
+}
+
+//Esq - Dir - Raiz
+void postorder (ABin a){
+    if (a!=NULL){
+        postorder(a->esq);
+        postorder(a->dir);
+        printf("%d ", a->valor);
+    } 
+}
+
+//Começar a libertar os nós pelas folhas (travessia postorder)
+void freeABin (ABin a){
+    if (a!=NULL){
+        postorder(a->esq);
+        postorder(a->dir);
+        free(a);
+    }  
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
 
 //alinea (e) - testa se x ocorre na arvore. Nao assuma qualquer propriedade sobre a arvore a.
 int procuraE (ABin a, int x){
@@ -67,6 +121,13 @@ int procuraE (ABin a, int x){
         r = 1;
     else
         return procuraE(a->esq,x) || procuraE(a->dir,x);
+}
+
+int procuraE_v2 (ABin a, int x){
+    int r = 0;
+    if (a != NULL)
+        r = a->valor == x || procuraE_v2(a->esq,x) || procuraE_v2(a->dir,x);
+    return r;
 }
 
 //Exercicio 2
@@ -78,6 +139,17 @@ struct nodo *procura (ABin a, int x){
         return procura(a->dir,x);
     else
         return procura(a->esq,x);
+}
+
+ABin procura_v2 (ABin a, int x){
+    ABin r;
+    if (a == NULL || a->valor == x)
+        r = a;
+    else if (x > a->valor)
+        r = procura_v2(a->dir,x);
+    else
+        r = procura_v2(a->esq,x);
+    return r;
 }
 
 //alinea(b) - calcula o nivel a que o elemento ocorre na arvore (-1 caso nao exista) - CORRIGIR
