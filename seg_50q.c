@@ -287,7 +287,190 @@ int maximo (LInt l){
     return r;
 }
 
-//Exercicio 69: dado um inteiro n e uma lista ligada de inteiros l, 
-// apaga de l todos os nodos para alem do n-esimo (libertando o respectivo espaço). 
+//Exercicio 69: dado um inteiro n e uma lista ligada de inteiros l, apaga de l todos os nodos para alem do n-esimo (libertando o respectivo espaço). 
 // Se a lista tiver n ou menos nodos, a funçao nao altera a lista.
 // A funçao deve retornar o comprimento final da lista. 
+int take (int n, LInt *l){
+    int i = 0;
+    LInt aux;
+    
+    //mantem na lista todos os elementos desejados
+    while (*l != NULL && i < n){
+        i++;
+        l = &((*l)->prox);
+    }
+    
+    //percorremos o resto da lista que falta e apagamos todos esses elementos
+    while (*l != NULL){
+        aux = *l;
+        free(aux);
+        *l = (*l)->prox;
+    }
+
+    return i;
+}
+
+//Exercicio 70: dado um inteiro n e uma lista ligada de inteiros l, apaga de l os n primeiros elementos da lista (libertando o respectivo espaço). 
+// Se a lista tiver n ou menos nodos, a funçao liberta a totalidade da lista.
+//A funçao deve retornar o numero de elementos removidos.
+int drop (int n, LInt *l){
+    int i;
+    LInt aux;
+    for(i = 0; i < n && (*l); i++) {
+        aux = (*l);
+        (*l) = (*l)->prox;
+        free(aux);
+    }
+    return i;
+}
+
+//Exercicio 71: dada uma lista circular dá como resultado o endereço do elemento da lista que está N posiçoes à frente.
+LInt NForward (LInt l, int N){
+    for (int i = 0; i < N && l!=NULL; i++){
+        l = l->prox;
+    }
+    LInt res = l;
+    return res;
+}
+
+//Exercicio 72: dada uma lista l, preenche o array v com os elementos da lista.
+// A função deverá preencher no maximo N elementos e retornar o numero de elementos preenchidos.
+int listToArray (LInt l, int v[], int N){
+    int i;
+    for (i = 0; i < N && l != NULL; i++){
+        v[i] = l->valor;
+        l=l->prox;
+    }
+    return i;
+}
+
+//Exercicio 73: constroi uma lista com os elementos de um array, pela mesma ordem em que aparecem no array.
+LInt arrayToList (int v[], int N){
+    if(N == 0) 
+        return NULL;
+    LInt new = malloc(sizeof(struct lligada));
+    new->valor = (*v);
+    new->prox = arrayToList(v+1, N-1);
+    return new;
+}
+
+//Exercicio 74: dada uma lista de inteiros, constroi uma nova lista de inteiros contendo as somas acumuladas da lista original (que deverá permanecer inalterada).
+//Por exemplo, se a lista l tiver os valores [1,2,3,4] a lista construida pela invocação de somasAcL(l) deverá conter os valores[1, 3, 6, 10].
+LInt somasAcL (LInt l) {
+    int sum = 0;
+    LInt res = NULL;
+    LInt aux = NULL;
+    while(l!=NULL){
+        sum += l->valor;//Valor a adicionar em cada nó da nova lista
+
+        //Alocação de um nó
+        LInt new   = malloc(sizeof(struct lligada));
+        new->valor = sum;
+        new->prox  = NULL;  
+
+        
+        if(res == NULL)
+            res = aux = new; //Caso seja para adicionar o primeiro novo nó
+        else
+            aux = aux->prox = new;
+    
+        l=l->prox;
+    }
+    return res;
+}
+
+//Exercicio 75: dada uma lista ordenada de inteiros, elimina dessa lista todos os valores repetidos assegurando que o espaço de memoria 
+//correspondente aos nós removidos é correctamente libertado. 
+void remreps (LInt l){
+    LInt aux;
+    LInt prev = NULL;
+
+    while (l != NULL) {
+        //Elimina elementos repetidos sucessivos (a lista deve estar ordenada)
+        if (prev != NULL && prev-> valor == l->valor) {
+            prev->prox = l->prox;
+            aux = l;
+            free(l);
+        }
+        else //Mantem elemento na lista 
+            prev = l;
+        l = l->prox;
+    }
+}
+
+//Exercicio 76: coloca o primeiro elemento de uma lista no fim. 
+//Se a lista for vazia ou tiver apenas um elemento, a funçao nao tem qualquer efeito pratico (i.e., devolve a mesma lista que recebe como argumento).
+//Note que a sua funçao nao deve alocar nem libertar memoria. Apenas re-organizar as celulas da lista.
+LInt rotateL (LInt l){
+    if (l == NULL || l->prox == NULL)
+        return l;
+
+    LInt first = l;
+    LInt r = l->prox;//ignora-se o primeiro elemento da lista original
+
+    while ( l->prox != NULL)
+        l = l->prox;
+
+    l->prox = first;
+    first->prox = NULL;
+
+    return r;
+}
+
+//Exercicio 77: parte uma lista l em duas: na lista l ficam apenas os elementos das posiçoes impares; 
+//na lista resultante ficam os restantes elementos (elementos das posiçoes pares).
+//Assim, se a lista x tiver os elementos {1,2,3,4,5,6} a chamada y = parte (x), coloca na lista y os elementos {2,4,6} ficando em x apenas os elementos {1,3,5}
+LInt parte (LInt l){
+    if(l == NULL || l->prox == NULL)
+        return NULL;
+    LInt pares = l->prox;
+    l->prox = l->prox->prox;
+    pares->prox = parte(l->prox);
+    return pares;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef struct nodo {
+    int valor;
+    struct nodo *esq, *dir;
+} *ABin;
+
+//Exercicio 78: calcula a altura de uma arvore binaria
+int max(int x, int y){
+    return x > y ? x:y;
+}
+
+int altura (ABin a){
+    int alt = 0;
+    if (a == NULL)
+        alt == 0;
+    else
+        alt = 1 + max(altura(a->esq),altura(a->dir));
+	return alt;
+}
+
+//Exercicio 79: cria uma cópia de uma arvore binaria
+ABin cloneAB (ABin a) {
+    if (a != NULL){
+        ABin res = malloc(sizeof(struct nodo));
+        res->valor = a->valor;
+        res->esq = cloneAB(a->esq);
+        res->dir = cloneAB(a->dir);       
+        return res;
+    }
+    return NULL;
+}
+
+//Exercicio 80:  inverte uma arvore (sem criar uma nova arvore)
+void mirror (ABin *a) {
+    ABin aux;
+    if (*a != NULL){
+        aux = (*a)->esq;
+        (*a)->esq = (*a)->dir;
+        (*a)->dir = aux;
+        mirror(&((*a)->esq));
+        mirror(&((*a)->dir));
+    }
+}
+
+//Exercicio 81: 
