@@ -22,7 +22,7 @@ void freeL (LInt l){
     while (l != NULL){
         temp = l;
         l = l->prox;
-        free (tmp);
+        free(temp);
     }
 }
 
@@ -140,10 +140,11 @@ int removeAll (LInt *l, int x){
     LInt prev = NULL;
     while (aux != NULL) {
         if(aux->valor == x) {
-            if (prev != NULL)
-                prev->prox = aux->prox; //prev aponta para o proximo elemento de aux (excluindo o elemento repetido)
+            //Elemento anterior é NULL
+            if (prev == NULL)
+                *l = aux->prox; //ignora-se o valor igual a x
             else
-                *l = aux->prox; //lista original aponta para o proximo elemento de aux (excluindo o elemento repetido)
+                prev->prox = aux->prox; //prev aponta para o proximo elemento de aux (excluindo o elemento repetido)
             rmv++;
             free(aux); //liberta-se o nó que é repetido
         }
@@ -152,3 +153,141 @@ int removeAll (LInt *l, int x){
         aux = aux->prox;
     }
     return rmv;
+}
+
+//Exercicio 61: remove os valores repetidos de uma lista (deixando apenas a primeira ocorrencia)
+int removeDups (LInt *l){
+    LInt aux = *l; LInt prev = NULL;
+    LInt escravo;
+    int c = 0;
+    int isRepetido; 
+    
+    while (aux != NULL) {
+        for(escravo = *l; escravo != aux; escravo = escravo->prox) {  
+            isRepetido = 0;
+            if(escravo->valor == aux->valor) { 
+                isRepetido = 1;
+                break;
+            }
+        }
+        if (isRepetido == 1) {
+            prev->prox = aux->prox;//ignora valor repetido de aux
+            free(aux);
+            c++;
+        }
+        else 
+            prev = aux;//mantem valor na lista
+            
+        aux = aux->prox;
+    }
+    return c;
+}
+
+//Exercicio 62: remove (a primeira ocorrencia) o maior elemento de uma lista nao vazia, retornando o valor desse elemento.
+int removeMaiorL (LInt *l){
+    int r = (*l)->valor;
+    int maior = maiorElemento(l);
+    int flag = 0; //so queremos apagar a primeira ocorrencia do maior elemento
+    LInt aux = *l;
+    LInt prev = NULL;
+    
+    while(aux != NULL && flag == 0){
+        if (aux->valor == maior){
+            if (prev == NULL)
+                *l = aux->prox;
+            else{
+                prev->prox = aux->prox;
+                free(aux);
+            }
+            r = maior;
+            flag = 1;
+        }
+        else
+            prev = aux;
+        aux=aux->prox;
+    }
+    return r;
+}
+
+//Exercicio 63: remove o ultimo elemento de uma lista nao vazia (libertando o correspondente espaço)
+void init (LInt *l) {
+    LInt prev = NULL;
+    while((*l)->prox != NULL){
+        prev = *l;
+        l = &((*l)->prox);
+    }
+
+    if(prev == NULL) {
+        free(*l);
+        *l = NULL;
+    }
+    else {
+        prev->prox = NULL;
+        free(*l);
+    }
+}
+
+//Exercicio 64: acrescenta um elemento no fim da lista.
+void appendL (LInt *l, int x){
+    LInt res = malloc (sizeof(struct lligada));
+    res->valor = x;
+    res->prox = NULL;
+    
+    if (*l != NULL){
+        while ((*l)->prox != NULL)
+            l = &((*l)->prox);
+        (*l)->prox = res;
+    }
+    else
+        *l = res;
+}
+
+//Exercicio 65: acrescenta a lista b à lista *a.
+void concatL (LInt *a, LInt b){
+    while ((*a) != NULL){
+        a = &((*a)->prox);
+    }
+    *a = b;
+}
+
+//Exercicio 66: Copia uma lista ligada
+LInt cloneL (LInt l) {
+    if(l == NULL) 
+        return NULL; 
+    LInt new = malloc(sizeof(struct lligada));
+    new->valor = l->valor;
+    new->prox = cloneL(l->prox);
+    return new;
+}
+
+//Exercicio 67: Copia uma lista ligada pela ordem inversa
+LInt cloneRev (LInt l){
+    LInt newReverse = NULL;
+    LInt aux = NULL;
+
+    while (l != NULL) {
+        newReverse = malloc (sizeof(struct lligada));
+        newReverse->valor = l->valor;
+        newReverse->prox = aux; //a nova lista fica sempre a apontar para o ultimo elemento inserido
+        aux = newReverse;
+        l = l->prox;
+    }
+
+    return newReverse;
+}
+
+//Exercicio 68: calcula qual o maior valor armazenado numa lista nao vazia
+int maximo (LInt l){
+    int r = l->valor;
+    while(l!=NULL){
+        if (l->valor > r)
+            r = l->valor;
+        l = l->prox;
+    }
+    return r;
+}
+
+//Exercicio 69: dado um inteiro n e uma lista ligada de inteiros l, 
+// apaga de l todos os nodos para alem do n-esimo (libertando o respectivo espaço). 
+// Se a lista tiver n ou menos nodos, a funçao nao altera a lista.
+// A funçao deve retornar o comprimento final da lista. 
