@@ -152,7 +152,7 @@ ABin procura_v2 (ABin a, int x){
     return r;
 }
 
-//alinea(b) - calcula o nivel a que o elemento ocorre na arvore (-1 caso nao exista) - CORRIGIR
+//alinea(b) - calcula o nivel a que o elemento ocorre na arvore (-1 caso nao exista) 
 int nivel (ABin a, int x){
     int n = -1;
     if (a == NULL)
@@ -171,7 +171,7 @@ int nivel (ABin a, int x){
      }
 }
 
-//alinea(c) - e imprime no ecran, por ordem crescente, todos os elementos da arvore que sao (estritamente) menores do que um dado valor - CORRIGIR
+//alinea(c) - e imprime no ecran, por ordem crescente, todos os elementos da arvore que sao (estritamente) menores do que um dado valor 
 void imprimeAte (ABin a, int x){
     if (a == NULL)
         return;

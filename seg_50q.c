@@ -1,5 +1,4 @@
 #include <stdio.h>
-//https://github.com/62random/100_Questions_Imperative_Programming/blob/master/questoes2.c
 
 typedef struct lligada {
     int valor;
@@ -473,4 +472,401 @@ void mirror (ABin *a) {
     }
 }
 
-//Exercicio 81: 
+//Exercicio 81: cria uma lista ligada de inteiros a partir de uma travessia inorder de uma árvore binária
+//Esq - Raiz - Dir
+void inorder_aux (ABin a, LInt * l) {
+    LInt new;
+    if(a != NULL) {
+        inorder_aux(a->dir,l);
+
+        new = malloc(sizeof (LInt));
+        new->valor = a->valor;
+        new->prox = *l;
+
+        *l = new;
+
+        inorder_aux(a->esq,l);
+    }
+}
+
+void inorder (ABin a, LInt *l){
+    *l = NULL;
+    inorder_aux (a,l);
+}
+
+//Exercicio 82: cria uma lista ligada de inteiros a partir de uma travessia preorder de uma árvore binária
+//Raiz - Esq - Dir
+void preorder_aux (ABin a, LInt * l) {
+    LInt aux;
+    if(a != NULL) {
+        preorder_aux(a->dir,l);
+        preorder_aux(a->esq,l);
+
+        aux = malloc(sizeof(struct lligada));
+        aux->valor = a->valor;
+        aux->prox = *l;
+
+        *l = aux;
+    }
+}
+
+void preorder(ABin a, LInt * l) {
+    *l = NULL;
+    preorder_aux (a,l);
+}
+
+//Exercicio 83: cria uma lista ligada de inteiros a partir de uma travessia posorder de uma árvore binária
+//Esq - Dir - Raiz
+void posorder_aux (ABin a, LInt * l) {
+    LInt aux;
+    if(a != NULL) {
+        aux = malloc(sizeof(struct lligada));
+        aux->valor = a->valor;
+        aux->prox = *l;
+
+        *l = aux;
+        
+        posorder_aux(a->dir,l);
+        posorder_aux(a->esq,l);
+
+
+    }
+}
+
+void posorder (ABin a, LInt * l) {
+    *l = NULL;
+    posorder_aux (a,l);
+}
+
+//Exercicio 84: calcula o nivel (menor) a que um elemento está numa arvore binaria (-1 caso nao exista)
+int depth (ABin a, int x) {
+    if(a == NULL)
+        return -1;
+
+    if(a->valor == x) 
+        return 1;
+
+    int esq = depth(a->esq,x);
+    int dir = depth(a->dir,x);
+
+    if(esq == -1 && dir == -1) 
+        return -1;
+        
+    if(esq == -1 && dir != -1)
+        return 1 + dir;
+    
+    if(esq != -1 && dir == -1)
+        return 1 + esq;
+    
+    return esq < dir ? 1 + esq : 1 + dir;
+}
+
+//Exercicio 85: liberta o espaço ocupado por uma arvore binaria, retornando o numero de nós removidos
+int freeAB (ABin a) {
+    int r = 0;
+    //Remover os nós de baixo para cima da árvore e fazer uma travessia posorder (esq - dir - raiz)
+    if (a != NULL){
+        r += freeAB(a->esq);
+        r += freeAB(a->dir);
+        free(a);
+        r++;        
+    }
+    return r;
+}
+
+//Exercicio 86: e remove (libertando o espaço respectivo) todos os elementos da árvore *a que estão a uma profundidade superior a l, retornando o numero de elementos removidos.
+//Assuma que a profundidade da raiz da árvore é 1, e por isso a invocação pruneAB(&a,0) corresponde a remover todos os elementos da árvore a.
+int pruneAB (ABin *a, int l) {
+    int r;
+    if((*a) == NULL)
+        return 0;
+    
+    if(l == 0) {
+        r = 1 + pruneAB(&((*a)->esq),0) + pruneAB(&((*a)->dir),0);
+        free(*a);
+        (*a) = NULL;
+    }
+    else 
+        r = pruneAB(&((*a)->esq),l-1) + pruneAB(&((*a)->dir),l-1);
+    
+    return r;
+}
+
+//Exercicio 87: testa se duas árvores são iguais (têm os mesmos elementos e a mesma forma)
+int iguaisAB (ABin a, ABin b) {
+    int bool = 0;
+    if (a == b) 
+        bool = 1;
+    if (a != NULL && b != NULL && a->valor == b->valor)
+        bool = iguaisAB(a->esq, b->esq) && iguaisAB(a->dir, b->dir);
+    return bool;
+}
+
+//Exercicio 88: dada uma árvore binária, constrói uma lista com os valores dos elementos que estão armazenados na árvore ao nível "n" (assuma que a raiz da árvore está ao nível "1")
+LInt concat (LInt a, LInt b){ //concatena 2 listas
+    if(a == NULL)
+        return b;
+    LInt aux = a;
+    while(aux->prox != NULL)
+        aux = aux->prox;
+    aux->prox = b;
+    return a;
+}
+
+
+LInt nivelL (ABin a, int n){
+    if (a == NULL || n < 1)
+        return NULL;
+
+    if (n == 1){
+        LInt new = malloc (sizeof(struct lligada));
+        new->valor = a->valor;
+        new->prox = NULL;
+        return new;
+    }
+    else
+        return(concat(nivelL(a->esq, n-1), nivelL (a->dir, n-1)));
+}
+
+//Exercicio 89: preenche o vector "v" com os elementos de "a" que se encontram no nível "n". 
+//Considere que a raiz da árvore se encontra no nível "1". 
+//A função deverá retornar o número de posições preenchidas do array. 
+int nivelV (ABin a, int n, int v[]) {
+    if (a == NULL || n < 1)
+        return 0;
+        
+    int r = 0;
+
+    if (a != NULL)
+        if (n != 1) {
+            r+= nivelV(a->esq,n-1,v);
+            r+= nivelV(a->dir,n-1,v+r);
+        } 
+        else{
+            v[r] = a->valor;
+            r++;
+        }
+    return r;
+}
+
+//Exercicio 90: dada uma árvore "a", preenche o array "v" com os elementos da árvore segundo uma travessia inorder. 
+//A função deverá preencher no máximo "N" elementos e retornar o número de elementos preenchidos.
+int dumpAbin (ABin a, int v[], int N) {
+    if (a == NULL)
+        return 0;
+    int r = 0;
+    if (a != NULL && N > 0){
+        r = dumpAbin (a->esq, v, N-1);
+        v[r] = a->valor;
+        r++;
+        r+=dumpAbin (a->dir, v+r, N-r);
+    }
+
+    return r;
+}
+
+//Exercicio 91: dada uma árvore de inteiros, calcula a árvore das somas acumuladas dessa árvore.
+// A árvore calculada deve ter a mesma forma da árvore recebida como argumento e em cada nodo deve conter a soma dos elementos da sub-árvore que aí se inicia.
+ABin somasAcA (ABin a) {
+    ABin new=NULL;
+
+    if(a != NULL){
+        new=malloc(sizeof(struct nodo));
+        new->esq = somasAcA(a->esq);
+        new->dir = somasAcA(a->dir);
+        new->valor = a->valor;
+
+        if(new->esq != NULL)
+            new->valor += new->esq->valor;
+            
+        if(new->dir != NULL)
+            new->valor += new->dir->valor;
+    }
+
+    return new;
+}
+
+//Exercicio 92: dada uma árvore binária de inteiros, conta quantos dos seus nodos são folhas, i.e., que não têm nenhum descendente.
+int contaFolhas (ABin a) {
+    int r = 0;
+    if (a != NULL){
+        if (a->esq == NULL && a->dir == NULL)
+            r++;
+        else
+            r+= contaFolhas (a->esq) + contaFolhas (a->dir);
+        
+    }
+    return r;
+}
+
+//Exercicio 93: cria uma árvore nova, com o resultado de inverter a árvore (efeito de espelho)
+ABin cloneMirror (ABin a) {
+    if (a == NULL)
+        return NULL;
+
+    ABin copia = malloc (sizeof (struct nodo));
+    copia->valor = a->valor;
+    copia->esq = cloneMirror(a->dir);
+    copia->dir = cloneMirror(a->esq);
+    return copia;
+}
+
+//Exercicio 94: adiciona um elemento a uma árvore binária de procura. 
+//A função deverá retornar "1" se o elemento a inserir já existir na árvore ou "0" no outro caso.
+//NAO RECURSIVO
+int addOrd (ABin *a, int x) {
+    while((*a)!=NULL) {
+        if((*a)->valor == x) 
+            return 1;
+            
+        if((*a)->valor > x) 
+            a = &((*a)->esq);
+        else 
+            a = &((*a)->dir);
+    }
+    
+    ABin new = malloc(sizeof(struct nodo));
+    new->valor = x;
+    new->esq = new->dir = NULL;
+    
+    (*a) = new;
+
+    return 0;
+}
+
+//Exercicio 95: testa se um elemento pertence a uma árvore binária de procura.
+//NAO RECURSIVO
+int lookupAB (ABin a, int x) {
+    while (a != NULL ){
+        if (a->valor == x)
+            return 1;
+        if (a->valor < x)
+            a = a->dir;
+        else
+            a = a->esq;
+
+    }
+    return 0;
+}
+
+//Exercicio 96: calcula o nível a que um elemento está numa árvore binária de procura ("-1" caso não exista)
+int depthOrd (ABin a, int x) {
+    int nivel;
+
+    for (nivel = 1; a != NULL; nivel++)
+        if (a->valor == x)
+            return nivel;
+        else if (x > a->valor)
+            a = a-> dir;
+        else
+            a = a->esq;
+
+    return -1;
+}
+
+//Exercicio 97: calcula o maior elemento de uma árvore binária de procura não vazia
+//NAO RECURSIVO
+int maiorAB (ABin a) {
+    if (a == NULL)
+        return -1;
+    else{
+        while (a->dir != NULL)
+            a=a->dir;
+        return (a->valor);        
+    }
+}
+
+//Exercicio 98: remove o maior elemento de uma árvore binária de procura.
+void removeMaiorA (ABin *a) {
+    if((*a)->dir == NULL) {
+        free(*a);
+        (*a) = (*a)->esq;
+    }
+    else
+        removeMaiorA(&((*a)->dir));
+}
+
+//Exercicio 99: dada uma árvore binária de procura de inteiros e um inteiro, conta quantos elementos da árvore são maiores que o inteiro dado
+int quantosMaiores (ABin a, int x) {
+    if (a == NULL)
+        return 0;
+    else if ( a->valor <= x)
+        return quantosMaiores(a->dir, x);
+    else
+        return 1 + quantosMaiores(a->dir, x) + quantosMaiores(a->esq, x);
+}
+
+//Exercicio 100: constrói uma árvore binária de procura a partir de uma lista ligada ordenada
+int length (LInt l) {
+    int r = 0;
+
+    while (l != NULL) {
+        l = l->prox;
+        r++;
+    }
+
+    return r;
+}
+
+LInt avanca_p_posicoes (LInt l, int p) {
+    while (p > 0) {
+        l = l->prox;
+        p--;
+    }
+    return l;
+}
+
+void fromList(LInt l, ABin *a, int N) {
+    int r,p;
+    LInt aux;
+
+    if (N > 0) {
+        *a = malloc(sizeof(struct nodo));
+        p = N/2;
+        aux = avanca_p_posicoes(l, p);
+        (*a)->valor = aux->valor;
+        fromList(l, &(*a)->esq, p);
+        fromList(aux->prox, &(*a)->dir, N - p - 1);
+    } 
+    else
+        *a = NULL;
+}
+
+void listToBTree (LInt l, ABin *a) {
+    int N = length(l);
+    fromList(l, a, N);
+}
+
+//Exercicio 101: testa se é uma arvore binaria de procura
+//Testa se os elementos da subarvore esquerda sao menores do que a raiz
+int is_menor (ABin a, int x) {
+    int res = 1;
+    if (a != NULL){
+        res = a->valor > x    && 
+        is_menor (a->esq, x)  && 
+        is_menor (a->dir, x);
+    }
+    return res;
+}
+//Testa se os elementos da subarvore direita sao maiores do que a raiz
+int is_maior (ABin a, int x) {
+    int res = 1;
+    if (a!=NULL) 
+        res = a->valor < x          && 
+              is_maior (a->esq, x)  && 
+              is_maior (a->dir, x);
+    
+    return res;
+}
+
+int deProcura (ABin a) {
+    int res = 1;
+    
+    if (a!=NULL) 
+        res = is_maior (a->esq, a->valor) && 
+              is_menor (a->dir, a->valor) && 
+              deProcura (a->esq)          && 
+              deProcura (a->dir);
+        
+    return res;
+}

@@ -1,5 +1,4 @@
 #include <stdio.h>
-//https://github.com/jjgonc/PI_2019-2020/blob/main/50questoes.c
 
 // 1: Programa que lê sequencia de numeros terminadas em 0 e imprime o maior elemento
 void maior (){
@@ -772,7 +771,8 @@ typedef struct posicao {
 } Posicao;
 
 int caminho (Posicao inicial, Posicao final, Movimento mov[], int N){
-    for (int i = 0; inicial.x != final.x || inicial.y != final.y; i++){
+    int i;
+    for (i = 0; inicial.x != final.x || inicial.y != final.y; i++){
         if (inicial.y > final.y){
             inicial.y--;
             mov[i] = Sul;

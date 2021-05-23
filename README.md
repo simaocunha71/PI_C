@@ -4,13 +4,15 @@
 ```
 50q.c    : Questoes 1  a 50  para avaliaçao  
 seg_50q.c: Questoes 51 a 100 para avaliaçao
-FICHA1: Estado e atribuições; Estruturas de controlo; Programas iterativos
-FICHA2: Algoritmos Numéricos sobre inteiros
-FICHA3: Vetores de inteiros
-FICHA4: Strings e arrays ordenados
-FICHA5: Structs e ordenações
-FICHA6: Buffers
-FICHA7: Listas
-FICHA8: Buffers implementados em lista
-FICHA9: Árvores
+FICHA1   : Estado e atribuições; Estruturas de controlo; Programas iterativos
+FICHA2   : Algoritmos Numéricos sobre inteiros
+FICHA3   : Vetores de inteiros
+FICHA4   : Strings e arrays ordenados
+FICHA5   : Structs e ordenações
+FICHA6   : Buffers
+FICHA7   : Listas
+FICHA8   : Buffers implementados em lista
+FICHA9   : Àrvores binárias
+FICHA10  : Àrvores binárias de procura
+
 ```
