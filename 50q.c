@@ -187,25 +187,25 @@ void strnoV (char t[]){
 }
 //13: Trunca cada palavra de uma string com no maximo n caracteres
 void truncW (char t[], int n){
-    int i,j,k;
-    i = j = k = 0;
+    int i,letraAdd,new;
+    i = letraAdd = new = 0;
 
     while (t[i] != '\0'){
-        if (t[i] == ' '){
-            t[k] = t[i];
-            k++; i++; j = 0;
+        if (isspace(t[i])){
+            t[new] = t[i];
+            new++; i++; letraAdd = 0;
         }
 
-        else if (j < n){
-            t[k] = t[i];
-            k++; i++; j++;
+        else if (letraAdd < n){
+            t[new] = t[i];
+            new++; i++; letraAdd++;
         }
 
-        else if (j >= n) 
+        else if (letraAdd >= n) 
             i++;
     }
 
-    t[k] = '\0';
+    t[new] = '\0';
 }
 //14: calcula o caractere mais frequente numa string
 int freq (char c, char s[]){
