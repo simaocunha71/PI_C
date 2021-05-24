@@ -538,9 +538,9 @@ int maxCresc (int v[], int N) {
 // Existe o valor x repetido no array v até ao indice j
 // 1 -> nao existe repetido
 // 0 -> existe repetido
-int existeRepetido (int x,int v[], int j){
+int naoexisteRepetido (int x,int v[], int j){
     int i, bool = 1;
-    for (i = 0; i < j; i++)
+    for (i = 0; i < j && bool == 1; i++)
         if (x == v[i])
             bool = 0;
     return bool;
@@ -550,7 +550,7 @@ int elimRep (int v[], int N) {
     int i, r = 0;
     
     for (i = 0; i < N; i++){
-        if (existeRepetido (v[i],v,i)){
+        if (naoexisteRepetido (v[i],v,i)){
             v[r] = v[i];
             r++;
         }
@@ -563,9 +563,9 @@ int elimRep (int v[], int N) {
 // Existe o valor x repetido no array v até ao indice j
 // 1 -> nao existe repetido
 // 0 -> existe repetido
-int existeRepetido (int x,int v[], int j){
+int naoexisteRepetido (int x,int v[], int j){
     int i, bool = 1;
-    for (i = 0; i < j; i++)
+    for (i = 0; i < j && bool == 1; i++)
         if (x == v[i])
             bool = 0;
     return bool;
@@ -575,7 +575,7 @@ int elimRepOrd (int v[], int N) {
     int i, r = 0;
     
     for (i = 0; i < N; i++){
-        if (existeRepetido (v[i],v,i)){
+        if (naoexisteRepetido (v[i],v,i)){
             v[r] = v[i];
             r++;
         }
